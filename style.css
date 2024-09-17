@@ -1,0 +1,57 @@
+.board {
+  display: grid;
+  height: 500px;
+  width: 500px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  padding: 2px;
+}
+
+#squaretopleft {
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+}
+
+#squaretopmiddle {
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  border-left: 5px solid black;
+}
+
+#squaretopright {
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+}
+
+#squaremiddleleft {
+  border-top: 5px solid black;
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+#squaremiddle {
+  border: 5px solid black;
+}
+
+#squaremiddleright {
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+#squarebottomleft {
+  border-top: 5px solid black;
+  border-right: 5px solid black;
+}
+
+#squarebottommiddle {
+  border-top: 5px solid black;
+  border-right: 5px solid black;
+  border-left: 5px solid black;
+}
+
+#squarebottomright {
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+}

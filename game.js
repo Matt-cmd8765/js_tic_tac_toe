@@ -16,6 +16,7 @@ function GameBoard () {
     function move (piece, row, column) {
         board[row][column] = piece;
     }
+
     return { move, getBoard }
 }
 
@@ -73,13 +74,12 @@ function Playgame () {
         }
     }
     const playRound = (row, column) => {
-        // Drop a token for the current player
+        // * Drop a token for the current player
         console.log(`Horrible move ${getActivePlayer().name}`);
         board.move(getActivePlayer().token, row, column);
-
+        
+        // * Check for winner
         winner();
-        /*  This is where we would check for a winner and handle that logic,
-            such as a win message. */
     
         // Switch player turn
         switchPlayerTurn();
@@ -97,6 +97,27 @@ function Playgame () {
         winner
       };
 }
+
+// function showscreen () {
+//     const showboard = (board) => {
+//         const boardDiv = document.querySelector('.board');
+//       // Render board squares
+//       board.forEach(row => {
+//         row.forEach((cell, index) => {
+//           // Anything clickable should be a button!!
+//           const cellButton = document.createElement("button");
+//           cellButton.classList.add("cell");
+//           // Create a data attribute to identify the column
+//           // This makes it easier to pass into our `playRound` function 
+//           cellButton.dataset.column = index
+//           cellButton.textContent = cell.getValue();
+//           boardDiv.appendChild(cellButton);
+//         })
+//       })      
+//     }
+
+//     return { showboard }
+// }
 
 const game = Playgame();
 
