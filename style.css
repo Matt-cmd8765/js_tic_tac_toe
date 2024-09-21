@@ -8,6 +8,11 @@
   padding: 2px;
 }
 
+button {
+  font-weight: bold;
+  font-size: 100px;
+}
+
 #squaretopleft {
   border-bottom: 5px solid black;
   border-right: 5px solid black;

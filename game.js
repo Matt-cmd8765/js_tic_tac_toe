@@ -69,6 +69,7 @@ function Playgame () {
                 }
             if (xs.length === 3 || os.length === 3) {
                 console.log('Winner!');
+                return true;
             }
             }       
         }
@@ -79,7 +80,9 @@ function Playgame () {
         board.move(getActivePlayer().token, row, column);
         
         // * Check for winner
-        winner();
+        if (winner() === true) {
+            alert('Mad cunt! You win!');
+        };
     
         // Switch player turn
         switchPlayerTurn();
@@ -98,26 +101,22 @@ function Playgame () {
       };
 }
 
-// function showscreen () {
-//     const showboard = (board) => {
-//         const boardDiv = document.querySelector('.board');
-//       // Render board squares
-//       board.forEach(row => {
-//         row.forEach((cell, index) => {
-//           // Anything clickable should be a button!!
-//           const cellButton = document.createElement("button");
-//           cellButton.classList.add("cell");
-//           // Create a data attribute to identify the column
-//           // This makes it easier to pass into our `playRound` function 
-//           cellButton.dataset.column = index
-//           cellButton.textContent = cell.getValue();
-//           boardDiv.appendChild(cellButton);
-//         })
-//       })      
-//     }
+function ScreenController () {
+    const game = Playgame();
+    const butt = document.getElementsByTagName('button');
+    for (let i = 0; i < butt.length; i++) {
+        butt[i].addEventListener("click", function() {
+            column = butt[i].dataset.column;
+            row = butt[i].dataset.row;
+            butt[i].innerHTML = game.getActivePlayer().token;
+            game.playRound(row, column);
+        })
+    };
 
-//     return { showboard }
-// }
+    if (game.winner) {
+    }
+}
 
-const game = Playgame();
+ScreenController();
+
 
