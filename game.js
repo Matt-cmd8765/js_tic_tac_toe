@@ -4,6 +4,7 @@ function GameBoard () {
     const columns = 3;
     const board = [];
 
+    // * Create the board
     for (let i = 0; i < rows; i++) {
         board.push([]);
         for (let j = 0; j < columns; j++) {
@@ -11,8 +12,10 @@ function GameBoard () {
         }
       }
 
+    // ! return board array
     const getBoard = () => board;
-
+    
+    // * move pieve
     function move (piece, row, column) {
         board[row][column] = piece;
     }
@@ -24,6 +27,8 @@ function Playgame () {
     const player1 = 'Player 1';
     const player2 = 'Player 2';
     const board = GameBoard();
+
+    // ? JSON for the players
     const players = [
         {
           name: player1,
@@ -37,15 +42,13 @@ function Playgame () {
 
     let activePlayer = players[0];
 
+    // * switch player turn
     const switchPlayerTurn = () => {
       activePlayer = activePlayer === players[0] ? players[1] : players[0];
+      const turn = document.getElementsByClassName('turn');
+      turn[0].innerHTML = `${activePlayer.name}'s turn`;
     };
     const getActivePlayer = () => activePlayer;
-  
-    const printNewRound = () => {
-      console.log(board.getBoard());
-      console.log(`${getActivePlayer().name}'s turn.`);
-    };
 
     const winner = () => {
         // ! This is all the possible winning combinations
@@ -68,7 +71,7 @@ function Playgame () {
                     os.push('O');
                 }
             if (xs.length === 3 || os.length === 3) {
-                console.log('Winner!');
+                // console.log('Winner!');
                 return true;
             }
             }       
@@ -76,24 +79,21 @@ function Playgame () {
     }
     const playRound = (row, column) => {
         // * Drop a token for the current player
-        console.log(`Horrible move ${getActivePlayer().name}`);
+        // console.log(`Horrible move ${getActivePlayer().name}`);
         board.move(getActivePlayer().token, row, column);
-        
+
         // * Check for winner
         if (winner() === true) {
-            alert('Mad cunt! You win!');
+            setTimeout(() => {
+                alert(`${getActivePlayer().name} you mad cunt! You win!`);
+            }, "300"); 
+            return;
         };
     
-        // Switch player turn
+        // * Switch player turn
         switchPlayerTurn();
-        printNewRound();
       };
     
-      // Initial play game message
-      printNewRound();
-    
-      // For the console version, we will only use playRound, but we will need
-      // getActivePlayer for the UI version, so I'm revealing it now
       return {
         playRound,
         getActivePlayer,
@@ -103,7 +103,10 @@ function Playgame () {
 
 function ScreenController () {
     const game = Playgame();
+    const turn = document.getElementsByClassName('turn');
+    turn[0].innerHTML = `${game.getActivePlayer().name}'s turn`;
     const butt = document.getElementsByTagName('button');
+    // * This inserts the move into the 2d array and prints the player's token on the screen
     for (let i = 0; i < butt.length; i++) {
         butt[i].addEventListener("click", function() {
             column = butt[i].dataset.column;
@@ -112,9 +115,6 @@ function ScreenController () {
             game.playRound(row, column);
         })
     };
-
-    if (game.winner) {
-    }
 }
 
 ScreenController();
